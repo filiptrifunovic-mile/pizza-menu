@@ -1,17 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-/* eslint-disable no-unused-vars */
 const initialState = {
-  // cart: [],
-  cart: [
-    {
-      pizzaId: 12,
-      name: "Ama",
-      quantity: 2,
-      unitPrice: 15,
-      totalPrice: 30,
-    },
-  ],
+  cart: [],
 };
 
 const cartSlice = createSlice({
@@ -21,8 +11,8 @@ const cartSlice = createSlice({
     addItem(state, action) {
       state.cart.push(action.payload);
     },
-    deleteIdem(state, action) {
-      state.cart = state.cart.flter((item) => item.pizzaId !== action.payload);
+    deleteItem(state, action) {
+      state.cart = state.cart.filter((item) => item.pizzaId !== action.payload);
     },
     increaseItemQuantity(state, action) {
       const item = state.cart.find((item) => item.pizzaId === action.payload);
@@ -42,10 +32,21 @@ const cartSlice = createSlice({
 
 export const {
   addItem,
-  deleteIdem,
+  deleteItem,
   increaseItemQuantity,
   decreaseItemQuantity,
   clearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
+
+export const getCart = (state) => state.cart.cart;
+
+export const getTotalCartQuantity = (state) =>
+  state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
+
+export const getTotalCartPrice = (state) =>
+  state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+
+export const getCurrentQuantityById = (id) => (state) =>
+  state.cart.cart.find((item) => item.pizzaId === id)?.quantity ?? 0;
