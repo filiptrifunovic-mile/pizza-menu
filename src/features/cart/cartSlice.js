@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -52,3 +53,9 @@ export const getTotalCartPrice = (state) =>
 
 export const getCurrentQuantityById = (id) => (state) =>
   state.cart.cart.find((item) => item.pizzaId === id)?.quantity ?? 0;
+
+// export const getCurrentQuantityById = function (id) {
+//   return function (state) {
+//     return state.cart.cart.find((item) => item.pizzaId === id)?.quantity ?? 0;
+//   };
+// };
